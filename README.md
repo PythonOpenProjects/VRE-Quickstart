@@ -2,25 +2,40 @@
 A manual to deploy quickly a VRE
 
 
-Collaborative Virtual Enviroment
+IMPORTANT!!! THIS MANUAL IS A QUICKSTART AND HAS BEEN CREATED USING ALL ISTRUCTIONS AVAILABLE ON THE WEB (I DIDN'T REINVENT THE WHEEL).
 
-Quick start guide
+YOU CAN FIND MORE DETAILED INSTRUCTIONS (eg. HOW TO SET SSL, CONFIGURATIONS, BUGS, etc.) ON PROJECT'S WEBSITE:
+
+- JUPYTERHUB https://jupyter.org/hub
+- R-STUDIO https://posit.co/products/open-source/rstudio-server/
+- GITEA https://gitea.io/
+- POSTGRESQL https://www.postgresql.org/
+- MARIADB https://mariadb.org/
+- WIKIMEDIA https://releases.wikimedia.org
+- PHPBB https://www.phpbb.com/
 
 
 
-Virtual research environment (from Wikipedia):
+
+# Collaborative Virtual Enviroment
+
+# Quick start guide
+
+
+
+# Virtual research environment (from Wikipedia):
 
 A virtual research environment (VRE) or virtual laboratory is an online system helping researchers collaborate. Features usually include collaboration support (Web forums and wikis), document hosting, and some discipline-specific tools, such as data analysis, visualisation, or simulation management. In some instances, publication management, and teaching tools such as presentations and slides may be included. VREs have become important in fields where research is primarily carried out in teams which span institutions and even countries: the ability to easily share information and research results is valuable.
 
 
 
-Note:
+# Note:
 
 We'll use Ubuntu server 22.x
 
 
 
-LINUX:
+# LINUX:
 
 First of all: login as root on linux server and create all users we'll need (each user will access in a separated enviroment on jupyterhub and RStudio)
 
@@ -42,7 +57,7 @@ First of all: login as root on linux server and create all users we'll need (eac
 
 
 
-JUPYTER HUB quick install:
+# JUPYTER HUB quick install:
 
 
  -  apt update
@@ -67,7 +82,7 @@ JUPYTER HUB quick install:
 
 
 
-JULIA Kernel Repeat JULIASHELL for each account
+## JULIA Kernel Repeat JULIASHELL for each account
 
  -  wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz
  
@@ -89,7 +104,7 @@ JULIASHELL> installkernel("Julia")
 
 
 
-R kernel
+## R kernel
 
 Install
 
@@ -118,7 +133,7 @@ R SHELL> IRkernel::installspec(user = FALSE)
 
 
 
-OCTAVE Kernel Install
+## OCTAVE Kernel Install
 
  -  add-apt-repository ppa:octave/stable
  
@@ -139,20 +154,20 @@ OCTAVE Kernel Install
 
 
 
-MATLAB Kernel
+## MATLAB Kernel
 
  -  pip install matlab_kernel
 
 
 
 
-LUA Kernel
+## LUA Kernel
 
  -  pip install ilua
 
 
 
-MicroPython Kernel
+## MicroPython Kernel
 
  -  pip install jupyter_micropython_kernel
  
@@ -160,7 +175,7 @@ MicroPython Kernel
 
 
 
-Install voila
+## Install voila
 
 Voilà turns Jupyter notebooks into standalone web applications.
 
@@ -170,13 +185,13 @@ Starting with JupyterLab 3.0, the extension is automatically installed after ins
 
 
 
-Security TIP: Disable Jupyter Terminal!
+## Security TIP: Disable Jupyter Terminal!
 
  -  pip3 uninstall -y terminado
 
 
 
-#Let's go with the browser for JupyterHub:
+## Let's go with the browser for JupyterHub:
 
 http://myserver.com:8000/
 
@@ -187,33 +202,33 @@ http://myserver.com:8000/
 
 
 
-Install RStudio Server
+# Install RStudio Server
 
 
-Add R-base repository
+## Add R-base repository
 
  -  sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
 
 
-Run update
+## Run update
 
  -  sudo apt update
 
-Install Gdebi
+## Install Gdebi
 
 To easily install Rstudio Desktop or Server, we will use the Gdebi Package manager that will automatically fetch and install the required dependencies needed by the tool.
 
  -  sudo apt-get install gdebi-core
  
 
-Install OLD dependencies (broken in Ububtu 22.x) necessaries for RStudio
+## Install OLD dependencies (broken in Ububtu 22.x) necessaries for RStudio
 
  -  wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
  
  -  sudo apt install ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb
  
 
-Download RStudio Server package
+## Download RStudio Server package
 
  -  wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1093-amd64.deb
  
@@ -221,7 +236,7 @@ Download RStudio Server package
 
 
 
-Let's go!
+## Let's go!
 
 http://mywebserver.org:8787/
 
@@ -232,7 +247,7 @@ http://mywebserver.org:8787/
 
 
 
-Install PostgreSQL database and GITEA repository
+# Install PostgreSQL database and GITEA repository
         
  -  apt update          
  
@@ -337,7 +352,7 @@ host    giteadb    gitea    192.0.2.10/32    scram-sha-256
  -  systemctl enable --now gitea        
 
 
-#Let's go with the browser for Gitea:
+## Let's go with the browser for Gitea:
 
 http://myserver.com:3000
 
@@ -345,7 +360,7 @@ http://myserver.com:3000
 
 
 
-Install and prepare Maria DB for Mediawiki:
+# Install and prepare Maria DB for Mediawiki:
 
 
  -  apt update
@@ -364,10 +379,10 @@ MYSQL  -  CREATE USER 'new_mysql_user'@'localhost' IDENTIFIED BY 'MySuperPasswor
 
 
 
-Install  Wikimedia
+# Install  Wikimedia
 
 
-#Download the MediaWiki software   
+## Download the MediaWiki software   
    
  -  cd /tmp/          
  
@@ -406,7 +421,7 @@ MYSQL  -  GRANT ALL PRIVILEGES ON my_wiki.* TO 'wikiuser'@'mediawiki.example.com
 3) After selecting the language, the configuration script performs some environmental checks.
 
 
-NOTE:
+## NOTE:
 
 If need, you'll have to:
 
@@ -431,7 +446,7 @@ If need, you'll have to:
 LocalSettings.php contains all the information needed by MediaWiki to run.
 
 
-#Let's go with the browser for Mediawiki:
+## Let's go with the browser for Mediawiki:
 
 http://myserver.com/mediawiki/
 
@@ -456,7 +471,7 @@ eg.
 
 
         
-PHPBB forum Install
+# PHPBB forum Install
 
 
 wget https://download.phpbb.com/pub/release/3.3/3.3.10/phpBB-3.3.10.zip
@@ -500,7 +515,7 @@ phpBB should now be available, please MAKE SURE you read at least Section 6 belo
 
 
 
-Security TIPS - rename the "install" directory:
+Security TIPS - rename (or delete) the "install" directory:
 
  -  mv install/ nopeinstall/
 
