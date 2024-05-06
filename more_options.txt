@@ -1,0 +1,33 @@
+https://blog.gitea.com/render-jupyter-notebooks/
+
+
+How to render Jupyter Notebooks on Gitea
+
+1) pip3 install nbconvert
+
+2) cd /etc/gitea/app.ini
+
+3) nano app.ini
+
+4) add the following text:
+
+; Gitea looks for markup.xxxxx and will apply both "markup" and "xxxxx" as a class to the parent <div>
+[markup.jupyter]
+ENABLED = true
+; all the file extensions we want to convert, comma separated.
+FILE_EXTENSIONS = .ipynb
+; Lets use out nbconvert command from earlier - making to sure to convert to HTML and to output to stdout
+RENDER_COMMAND = "jupyter nbconvert --stdout --to html --template full "
+; nbconvert accepts a path to a file and not stdin
+IS_INPUT_FILE = true
+
+; the name after sanitizer doesn't really matter
+[markup.sanitizer.jupyter0]
+; Jupyter chiefly uses divs
+ELEMENT = div
+; we will need access to html classes later
+ALLOW_ATTR = class
+; we don't mind which classes we keep, so let's keep all of them
+REGEXP =
+
+5) systemctl restart gitea
