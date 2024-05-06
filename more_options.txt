@@ -1,7 +1,8 @@
+############################################
+# How to render Jupyter Notebooks on Gitea #
+############################################
+
 https://blog.gitea.com/render-jupyter-notebooks/
-
-
-How to render Jupyter Notebooks on Gitea
 
 1) pip3 install nbconvert
 
